@@ -12,8 +12,15 @@ app = Flask(__name__)
 CORS(app)
 load_dotenv()
 
+@app.route("/api/v1/localizacao/empresas/", defaults={'cnpj': "null"}, methods=["GET"])
 @app.route("/api/v1/localizacao/empresas/<cnpj>", methods=["GET"])
 def localizar_por_cnpj(cnpj):
+    if (cnpj == "null"):
+        return jsonify({
+            "status": "400",
+            "error": "Valor ausente!"
+        })
+        
     try:  
         dados = requests.get(f"https://www.receitaws.com.br/v1/cnpj/{re.sub(r'\D', '', cnpj)}").json()
                 
