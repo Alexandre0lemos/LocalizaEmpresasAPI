@@ -1,18 +1,19 @@
 import requests
 import re
 from flask import Flask, jsonify
+from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 
 URL_API = "https://nominatim.openstreetmap.org/search"
 
 app = Flask(__name__)
+
+CORS(app)
 load_dotenv()
 
 @app.route("/api/v1/localizacao/empresas/<cnpj>", methods=["GET"])
-def localizar_por_cnpj():
-    cnpj = "17.339.293/0001-39"
-    
+def localizar_por_cnpj(cnpj):
     try:  
         dados = requests.get(f"https://www.receitaws.com.br/v1/cnpj/{re.sub(r'\D', '', cnpj)}").json()
                 
