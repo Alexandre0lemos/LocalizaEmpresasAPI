@@ -29,7 +29,7 @@ def localizar_por_cnpj(cnpj):
         
         street = f"{logradouro} {numero}".strip()
         
-        if type(numero) == str and numero.strip() == "":
+        if type(numero) == str or numero.strip() == "":
             street = logradouro
         
         params = {
