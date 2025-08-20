@@ -12,7 +12,6 @@ app = Flask(__name__)
 CORS(app)
 load_dotenv()
 
-@app.route("/api/v1/localizacao/empresas/", defaults={'cnpj': "null"}, methods=["GET"])
 @app.route("/api/v1/localizacao/empresas/<cnpj>", methods=["GET"])
 def localizar_por_cnpj(cnpj):
     if (cnpj == "null"):
