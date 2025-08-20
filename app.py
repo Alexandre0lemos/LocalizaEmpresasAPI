@@ -1,6 +1,6 @@
 import requests
 import re
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -10,20 +10,18 @@ URL_API = "https://nominatim.openstreetmap.org/search"
 app = Flask(__name__)
 
 CORS(app)
+
 load_dotenv()
 
-@app.route("/api/v1/localizacao/empresas/<cnpj>", methods=["GET"])
-def localizar_por_cnpj(cnpj):
-    if (cnpj == "null"):
-        return jsonify({
-            "status": "400",
-            "error": "Valor ausente!"
-        })
-        
+@app.route("/api/v1/localizacao/empresas", methods=["GET"])
+def localizar_por_cnpj():
     try:  
+        cnpj = request.args.get("cnpj")
+        
         dados = requests.get(f"https://www.receitaws.com.br/v1/cnpj/{re.sub(r'\D', '', cnpj)}").json()
                 
         numero = dados["numero"]
+        
         logradouro = dados["logradouro"]
         
         street = f"{logradouro} {numero}".strip()
