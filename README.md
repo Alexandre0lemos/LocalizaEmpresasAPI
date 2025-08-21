@@ -1,6 +1,6 @@
 # 📍 LocalizaEmpresasAPI
 
-API RESTful para consulta de dados empresariais via **CNPJ** e obtenção da **geolocalização** com base no endereço cadastrado.  
+API REST para consulta de dados empresariais via **CNPJ** e obtenção da **geolocalização** com base no endereço cadastrado.  
 Utiliza a [ReceitaWS](https://www.receitaws.com.br/) para obter informações da empresa e o [Nominatim OpenStreetMap](https://nominatim.openstreetmap.org/) para geocodificação.
 
 ---
